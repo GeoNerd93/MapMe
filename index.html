@@ -107,6 +107,12 @@
  <div id="sidePanel">
   <h3>Layers</h3>
 
+<div class="layer-item">
+  <input type="checkbox" id="chkCountries" checked>
+  <span>🌍 Countries</span>
+</div>
+
+
   <div class="layer-item">
     <input type="checkbox" id="chkRivers" checked>
     <span>🌊 Rivers</span>
@@ -131,6 +137,8 @@
     <input type="checkbox" id="chkSoil" checked>
     <span>🌱 Soil Types</span>
   </div>
+
+   
 </div>
 
 
@@ -191,6 +199,30 @@ fetch('data/ne_50m_rivers.geojson')
 
   
   // Layer control
+
+    // -------- COUNTRIES LAYER (NATURAL EARTH) --------
+
+var countries = L.geoJSON(null, {
+  style: {
+    color: '#6b7280',
+    weight: 1,
+    fillColor: '#e5e7eb',
+    fillOpacity: 0.2
+  },
+  onEachFeature: function (feature, layer) {
+    if (feature.properties && feature.properties.ADMIN) {
+      layer.bindPopup("🌍 Country: " + feature.properties.ADMIN);
+    }
+  }
+}).addTo(map);
+
+fetch('data/ne_50m_countries.geojson')
+  .then(res => res.json())
+  .then(data => countries.addData(data))
+  .catch(err => console.error("Failed to load countries:", err));
+
+     // Layer control
+
       // -------- BIOSPHERE RESERVES LAYER --------
 
   var biospheres = L.layerGroup();
@@ -376,6 +408,7 @@ var overlays = {
     div.innerHTML += '🦌 Protected Areas<br>';
     div.innerHTML += '🌍 Climate Zones<br>';
     div.innerHTML += '🌱 Soil Types<br>';
+    div.innerHTML += '🌍 Countries<br>';
 
     return div;
   };
@@ -400,7 +433,7 @@ bindToggle('chkBiosphere', biospheres);
 bindToggle('chkProtected', protectedAreas);
 bindToggle('chkClimate', climateZones);
 bindToggle('chkSoil', soilTypes);
-
+bindToggle('chkCountries', countries);
 
 
 const panel = document.getElementById('sidePanel');
