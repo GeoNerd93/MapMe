@@ -89,6 +89,9 @@
 
 <div id="map"></div>
 
+  <div id="layerToggleBtn">🧭 Layers</div>
+
+
  <div id="sidePanel">
   <h3>Layers</h3>
 
@@ -392,7 +395,26 @@ bindToggle('chkBiosphere', biospheres);
 bindToggle('chkProtected', protectedAreas);
 bindToggle('chkClimate', climateZones);
 bindToggle('chkSoil', soilTypes);
- 
+
+    #layerToggleBtn {
+  position: fixed;
+  top: 140px;
+  right: 10px;
+  background: #1f3a8a;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  z-index: 1001;
+}
+const panel = document.getElementById('sidePanel');
+const btn = document.getElementById('layerToggleBtn');
+
+btn.addEventListener('click', () => {
+  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+});
+
 
 </script>
 
