@@ -104,9 +104,44 @@
   .addTo(rivers);
 
   // Layer control
-  var overlays = {
-    "🌊 Rivers": rivers
-  };
+      // -------- BIOSPHERE RESERVES LAYER --------
+
+  var biospheres = L.layerGroup();
+
+  // Nilgiri Biosphere Reserve (India)
+  L.circle([11.5, 76.5], {
+    color: 'green',
+    fillColor: '#2ecc71',
+    fillOpacity: 0.6,
+    radius: 50000
+  })
+  .bindPopup("Nilgiri Biosphere Reserve (India)")
+  .addTo(biospheres);
+
+  // Sundarbans Biosphere Reserve (India–Bangladesh)
+  L.circle([21.9, 89.0], {
+    color: 'green',
+    fillColor: '#2ecc71',
+    fillOpacity: 0.6,
+    radius: 50000
+  })
+  .bindPopup("Sundarbans Biosphere Reserve")
+  .addTo(biospheres);
+
+  // Yellowstone Biosphere Reserve (USA)
+  L.circle([44.6, -110.5], {
+    color: 'green',
+    fillColor: '#2ecc71',
+    fillOpacity: 0.6,
+    radius: 50000
+  })
+  .bindPopup("Yellowstone Biosphere Reserve")
+  .addTo(biospheres);
+
+    var overlays = {
+  "🌊 Rivers": rivers,
+  "🌱 Biosphere Reserves": biospheres
+};
 
   L.control.layers(null, overlays).addTo(map);
 </script>
