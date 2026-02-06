@@ -38,18 +38,44 @@
       background: #f1f1f1;
     }
 
-    #sidePanel {
+#sidePanel {
   position: fixed;
-  top: 140px;   /* BELOW search box */
-  right: 10px;  /* MOVE AWAY FROM SEARCH */
+  top: 140px;
+  right: 10px;
   width: 220px;
   background: white;
-  padding: 12px;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.25);
+  padding: 12px 14px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
   font-size: 14px;
   z-index: 1000;
+  display: none;
 }
+
+#sidePanel h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
+}
+
+.layer-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.layer-item input {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.layer-item span {
+  white-space: nowrap;
+}
+  
 
   </style>
 </head>
@@ -63,15 +89,35 @@
 
 <div id="map"></div>
 
-  <div id="sidePanel">
+ <div id="sidePanel">
   <h3>Layers</h3>
 
-  <label><input type="checkbox" id="chkRivers" checked> 🌊 Rivers</label>
-  <label><input type="checkbox" id="chkBiosphere" checked> 🌱 Biosphere</label>
-  <label><input type="checkbox" id="chkProtected" checked> 🦌 Protected Areas</label>
-  <label><input type="checkbox" id="chkClimate" checked> 🌍 Climate Zones</label>
-  <label><input type="checkbox" id="chkSoil" checked> 🌱 Soil Types</label>
+  <div class="layer-item">
+    <input type="checkbox" id="chkRivers" checked>
+    <span>🌊 Rivers</span>
+  </div>
+
+  <div class="layer-item">
+    <input type="checkbox" id="chkBiosphere" checked>
+    <span>🌱 Biosphere</span>
+  </div>
+
+  <div class="layer-item">
+    <input type="checkbox" id="chkProtected" checked>
+    <span>🦌 Protected Areas</span>
+  </div>
+
+  <div class="layer-item">
+    <input type="checkbox" id="chkClimate" checked>
+    <span>🌍 Climate Zones</span>
+  </div>
+
+  <div class="layer-item">
+    <input type="checkbox" id="chkSoil" checked>
+    <span>🌱 Soil Types</span>
+  </div>
 </div>
+
 
 
 <footer>
