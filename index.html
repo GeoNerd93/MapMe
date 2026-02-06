@@ -182,14 +182,55 @@
   .bindPopup("Yellowstone National Park (USA)")
   .addTo(protectedAreas);
 
+      // -------- CLIMATE ZONES (SIMPLIFIED) --------
 
-    var overlays = {
+  var climateZones = L.layerGroup();
+
+  // Tropical Climate
+  L.rectangle([[-23.5, -180], [23.5, 180]], {
+    color: '#16a34a',
+    weight: 1,
+    fillOpacity: 0.15
+  })
+  .bindPopup("🌴 Tropical Climate Zone")
+  .addTo(climateZones);
+
+  // Desert / Arid Climate (approximate regions)
+  L.rectangle([[15, -30], [35, 60]], {
+    color: '#eab308',
+    weight: 1,
+    fillOpacity: 0.2
+  })
+  .bindPopup("🏜️ Desert / Arid Climate")
+  .addTo(climateZones);
+
+  // Temperate Climate (Northern Hemisphere mid-latitudes)
+  L.rectangle([[35, -180], [60, 180]], {
+    color: '#3b82f6',
+    weight: 1,
+    fillOpacity: 0.15
+  })
+  .bindPopup("🌦️ Temperate Climate Zone")
+  .addTo(climateZones);
+
+  // Polar Climate
+  L.rectangle([[66.5, -180], [90, 180]], {
+    color: '#e5e7eb',
+    weight: 1,
+    fillOpacity: 0.4
+  })
+  .bindPopup("❄️ Polar Climate Zone")
+  .addTo(climateZones);
+
+
+var overlays = {
   "🌊 Rivers": rivers,
   "🌱 Biosphere Reserves": biospheres,
-  "🦌 Protected Areas / Sanctuaries": protectedAreas
+  "🦌 Protected Areas / Sanctuaries": protectedAreas,
+  "🌍 Climate Zones": climateZones
 };
 
-
+  
   L.control.layers(null, overlays).addTo(map);
 </script>
 
