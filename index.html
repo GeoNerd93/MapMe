@@ -243,7 +243,10 @@ var biospheres = L.geoJSON(null, {
         "<strong>" + feature.properties.name + "</strong>"
       );
     }
-  }
+  },
+  filter: function (feature) {
+    return feature.properties &&
+           feature.properties.type === 'Biosphere Reserve';
   }
 }).addTo(map);
 
