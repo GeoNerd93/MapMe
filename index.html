@@ -222,15 +222,45 @@
   .bindPopup("❄️ Polar Climate Zone")
   .addTo(climateZones);
 
+  // -------- SOIL TYPES (SIMPLIFIED) --------
+
+  var soilTypes = L.layerGroup();
+
+  // Alluvial Soil (Indo-Gangetic Plains)
+  L.rectangle([[22, 72], [32, 90]], {
+    color: '#a16207',
+    weight: 1,
+    fillOpacity: 0.25
+  })
+  .bindPopup("🌾 Alluvial Soil (Indo-Gangetic Plains)")
+  .addTo(soilTypes);
+
+  // Black Soil (Deccan Plateau)
+  L.rectangle([[16, 72], [24, 82]], {
+    color: '#1f2937',
+    weight: 1,
+    fillOpacity: 0.25
+  })
+  .bindPopup("⚫ Black Soil (Regur – Deccan Plateau)")
+  .addTo(soilTypes);
+
+  // Laterite Soil (Western Ghats & Eastern Ghats)
+  L.rectangle([[8, 73], [15, 80]], {
+    color: '#b45309',
+    weight: 1,
+    fillOpacity: 0.25
+  })
+  .bindPopup("🟤 Laterite Soil (Western & Eastern Ghats)")
+  .addTo(soilTypes);
 
 var overlays = {
   "🌊 Rivers": rivers,
   "🌱 Biosphere Reserves": biospheres,
   "🦌 Protected Areas / Sanctuaries": protectedAreas,
-  "🌍 Climate Zones": climateZones
+  "🌍 Climate Zones": climateZones,
+  "🌱 Soil Types": soilTypes
 };
 
-  
   L.control.layers(null, overlays).addTo(map);
 </script>
 
