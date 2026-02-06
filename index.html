@@ -224,38 +224,39 @@ fetch('data/ne_50m_countries.geojson')
      // Layer control
 
       // -------- BIOSPHERE RESERVES LAYER --------
+// -------- BIOSPHERE RESERVES (UNESCO) --------
 
-  var biospheres = L.layerGroup();
+var biospheres = L.geoJSON(null, {
+  pointToLayer: function (feature, latlng) {
+    return L.circleMarker(latlng, {
+      radius: 6,
+      fillColor: '#22c55e',
+      color: '#166534',
+      weight: 1,
+      fillOpacity: 0.8
+    });
+  },
+  onEachFeature: function (feature, layer) {
+    if (feature.properties && feature.properties.name) {
+      layer.bindPopup(
+        "🌱 Biosphere Reserve<br>" +
+        "<strong>" + feature.properties.name + "</strong>"
+      );
+    }
+  },
+  filter: function (feature) {
+    return feature.properties &&
+           feature.properties.type === 'Biosphere Reserve';
+  }
+}).addTo(map);
 
-  // Nilgiri Biosphere Reserve (India)
-  L.circle([11.5, 76.5], {
-    color: 'green',
-    fillColor: '#2ecc71',
-    fillOpacity: 0.6,
-    radius: 50000
-  })
-  .bindPopup("Nilgiri Biosphere Reserve (India)")
-  .addTo(biospheres);
+fetch('data/ne_10m_biosphere.geojson')
+  .then(res => res.json())
+  .then(data => biospheres.addData(data))
+  .catch(err => console.error("Failed to load biospheres:", err));
 
-  // Sundarbans Biosphere Reserve (India–Bangladesh)
-  L.circle([21.9, 89.0], {
-    color: 'green',
-    fillColor: '#2ecc71',
-    fillOpacity: 0.6,
-    radius: 50000
-  })
-  .bindPopup("Sundarbans Biosphere Reserve")
-  .addTo(biospheres);
+     // Layer control
 
-  // Yellowstone Biosphere Reserve (USA)
-  L.circle([44.6, -110.5], {
-    color: 'green',
-    fillColor: '#2ecc71',
-    fillOpacity: 0.6,
-    radius: 50000
-  })
-  .bindPopup("Yellowstone Biosphere Reserve")
-  .addTo(biospheres);
 
       // -------- PROTECTED AREAS / SANCTUARIES --------
 
