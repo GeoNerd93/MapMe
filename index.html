@@ -50,7 +50,7 @@
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<script>
+<!--<script>
   // Create the map
   var map = L.map('map').setView([20, 0], 2);
 
@@ -59,7 +59,58 @@
     maxZoom: 19,
     attribution: '© OpenStreetMap contributors'
   }).addTo(map);
+</script>-->
+
+  <script>
+  // Create the map
+  var map = L.map('map').setView([20, 0], 2);
+
+  // Add OpenStreetMap tiles
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  // -------- RIVERS LAYER --------
+
+  var rivers = L.layerGroup();
+
+  // Nile River
+  L.polyline([
+    [2.0, 31.0],
+    [15.0, 32.5],
+    [22.0, 31.5],
+    [30.0, 31.0]
+  ], { color: 'blue', weight: 3 })
+  .bindPopup("Nile River")
+  .addTo(rivers);
+
+  // Amazon River
+  L.polyline([
+    [-4.0, -73.0],
+    [-3.0, -60.0],
+    [-1.5, -50.0]
+  ], { color: 'blue', weight: 3 })
+  .bindPopup("Amazon River")
+  .addTo(rivers);
+
+  // Ganga River
+  L.polyline([
+    [30.9, 79.0],
+    [25.3, 83.0],
+    [22.0, 88.0]
+  ], { color: 'blue', weight: 3 })
+  .bindPopup("Ganga River")
+  .addTo(rivers);
+
+  // Layer control
+  var overlays = {
+    "🌊 Rivers": rivers
+  };
+
+  L.control.layers(null, overlays).addTo(map);
 </script>
+
 
 </body>
 </html>
