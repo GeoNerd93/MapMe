@@ -138,6 +138,13 @@
     <span>🌱 Soil Types</span>
   </div>
 
+<div class="layer-item">
+  <input type="checkbox" id="chkKoppen">
+  <span>🌦️ Köppen Climate</span>
+</div>
+
+
+   
    
 </div>
 
@@ -291,6 +298,15 @@ fetch('data/ne_10m_protected_areas_points.geojson')
 
          // Layer control
 
+// -------- KÖPPEN CLIMATE (TILE LAYER) --------
+
+var koppenClimate = L.tileLayer(
+  'https://geodata.ucdavis.edu/gadm/koppen/{z}/{x}/{y}.png',
+  {
+    opacity: 0.6,
+    attribution: 'Köppen–Geiger Climate (Beck et al., WorldClim)'
+  }
+);
 
 
       // -------- CLIMATE ZONES (SIMPLIFIED) --------
@@ -402,6 +418,22 @@ var overlays = {
     div.innerHTML += '🌱 Soil Types<br>';
     div.innerHTML += '🌍 Countries<br>';
 
+div.innerHTML += '<hr>';
+div.innerHTML += '<strong>🌦️ Köppen Climate</strong><br>';
+div.innerHTML += 'A – Tropical<br>';
+div.innerHTML += 'B – Dry<br>';
+div.innerHTML += 'C – Temperate<br>';
+div.innerHTML += 'D – Continental<br>';
+div.innerHTML += 'E – Polar<br>';
+
+
+
+
+
+
+
+    
+
     return div;
   };
 
@@ -427,6 +459,9 @@ bindToggle('chkClimate', climateZones);
 bindToggle('chkSoil', soilTypes);
 bindToggle('chkCountries', countries);
 
+bindToggle('chkKoppen', koppenClimate);
+
+    
 
 const panel = document.getElementById('sidePanel');
 const btn = document.getElementById('layerToggleBtn');
