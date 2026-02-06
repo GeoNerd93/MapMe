@@ -10,6 +10,12 @@
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   />
 
+  <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"
+/>
+
+
   <style>
     body {
       margin: 0;
@@ -49,6 +55,8 @@
 
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+ <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+ 
 
 <!--<script>
   // Create the map
@@ -262,6 +270,14 @@ var overlays = {
 };
 
   L.control.layers(null, overlays).addTo(map);
+      // -------- SEARCH CONTROL --------
+
+  L.Control.geocoder({
+    defaultMarkGeocode: true,
+    position: 'topleft',
+    placeholder: 'Search country / city / place'
+  }).addTo(map);
+
 
       // -------- LEGEND (LEAFLET CONTROL) --------
 
