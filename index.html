@@ -167,36 +167,29 @@
 
   // -------- RIVERS LAYER --------
 
-  var rivers = L.layerGroup();
+  // -------- RIVERS LAYER (NATURAL EARTH) --------
 
-  // Nile River
-  L.polyline([
-    [2.0, 31.0],
-    [15.0, 32.5],
-    [22.0, 31.5],
-    [30.0, 31.0]
-  ], { color: 'blue', weight: 3 })
-  .bindPopup("Nile River")
-  .addTo(rivers);
+var rivers = L.geoJSON(null, {
+  style: {
+    color: 'blue',
+    weight: 1.5
+  },
+  onEachFeature: function (feature, layer) {
+    if (feature.properties && feature.properties.name) {
+      layer.bindPopup("🌊 River: " + feature.properties.name);
+    }
+  }
+}).addTo(map);
 
-  // Amazon River
-  L.polyline([
-    [-4.0, -73.0],
-    [-3.0, -60.0],
-    [-1.5, -50.0]
-  ], { color: 'blue', weight: 3 })
-  .bindPopup("Amazon River")
-  .addTo(rivers);
+fetch('data/ne_50m_rivers.geojson')
+  .then(response => response.json())
+  .then(data => {
+    rivers.addData(data);
+  })
+  .catch(err => console.error("Failed to load rivers:", err));
 
-  // Ganga River
-  L.polyline([
-    [30.9, 79.0],
-    [25.3, 83.0],
-    [22.0, 88.0]
-  ], { color: 'blue', weight: 3 })
-  .bindPopup("Ganga River")
-  .addTo(rivers);
 
+  
   // Layer control
       // -------- BIOSPHERE RESERVES LAYER --------
 
