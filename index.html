@@ -300,13 +300,16 @@ fetch('data/ne_10m_protected_areas_points.geojson')
 
 // -------- KÖPPEN CLIMATE (TILE LAYER) --------
 
+// -------- KÖPPEN CLIMATE (TILE LAYER – WORKING) --------
+
 var koppenClimate = L.tileLayer(
-  'https://geodata.ucdavis.edu/gadm/koppen/{z}/{x}/{y}.png',
+  'https://tiles.openclimategis.org/koppen/{z}/{x}/{y}.png',
   {
     opacity: 0.6,
-    attribution: 'Köppen–Geiger Climate (Beck et al., WorldClim)'
+    attribution: 'Köppen–Geiger Climate Classification'
   }
 );
+
 
 
       // -------- CLIMATE ZONES (SIMPLIFIED) --------
