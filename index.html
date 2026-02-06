@@ -37,6 +37,20 @@
       font-size: 14px;
       background: #f1f1f1;
     }
+
+    #sidePanel {
+  position: fixed;
+  top: 140px;   /* BELOW search box */
+  right: 10px;  /* MOVE AWAY FROM SEARCH */
+  width: 220px;
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.25);
+  font-size: 14px;
+  z-index: 1000;
+}
+
   </style>
 </head>
 
@@ -48,6 +62,17 @@
 </header>
 
 <div id="map"></div>
+
+  <div id="sidePanel">
+  <h3>Layers</h3>
+
+  <label><input type="checkbox" id="chkRivers" checked> 🌊 Rivers</label>
+  <label><input type="checkbox" id="chkBiosphere" checked> 🌱 Biosphere</label>
+  <label><input type="checkbox" id="chkProtected" checked> 🦌 Protected Areas</label>
+  <label><input type="checkbox" id="chkClimate" checked> 🌍 Climate Zones</label>
+  <label><input type="checkbox" id="chkSoil" checked> 🌱 Soil Types</label>
+</div>
+
 
 <footer>
   OpenStreetMap data | Leaflet.js | MapMe
@@ -269,7 +294,7 @@ var overlays = {
   "🌱 Soil Types": soilTypes
 };
 
-  L.control.layers(null, overlays).addTo(map);
+//  L.control.layers(null, overlays).addTo(map);
       // -------- SEARCH CONTROL --------
 
   L.Control.geocoder({
@@ -302,9 +327,29 @@ var overlays = {
   };
 
   legend.addTo(map);
+   // -------- SIDE PANEL TOGGLE (CORRECT LOGIC) --------
+
+function bindToggle(checkboxId, layer) {
+  const checkbox = document.getElementById(checkboxId);
+  checkbox.addEventListener('change', function () {
+    if (this.checked) {
+      map.addLayer(layer);
+    } else {
+      map.removeLayer(layer);
+    }
+  });
+}
+
+// Bind to EXISTING layers
+bindToggle('chkRivers', rivers);
+bindToggle('chkBiosphere', biospheres);
+bindToggle('chkProtected', protectedAreas);
+bindToggle('chkClimate', climateZones);
+bindToggle('chkSoil', soilTypes);
+ 
 
 </script>
 
-
+  
 </body>
 </html>
