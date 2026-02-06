@@ -3,45 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <title>MapMe – World Atlas</title>
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f4f6fa;
-      text-align: center;
     }
     header {
-      padding: 20px;
+      padding: 15px;
       background: #1f3a8a;
       color: white;
+      text-align: center;
     }
-    main {
-      padding: 40px;
+    #map {
+      height: 85vh;
+      width: 100%;
     }
     footer {
-      padding: 10px;
+      text-align: center;
+      padding: 8px;
       font-size: 14px;
-      color: #555;
+      background: #f1f1f1;
     }
   </style>
 </head>
+
 <body>
 
 <header>
   <h1>🌍 MapMe – Interactive World Atlas</h1>
-  <p>Explore geography, climate, biospheres, rivers, and more</p>
+  <p>Pan • Zoom • Explore the World</p>
 </header>
 
-<main>
-  <p>This website will help identify:</p>
-  <p>• Countries • States • Rivers • Biosphere Reserves • Sanctuaries</p>
-  <p>• Soil Types • Climatic Regions • Oceans • Continents</p>
-  <p><strong>Next step:</strong> adding an interactive world map.</p>
-</main>
+<div id="map"></div>
 
 <footer>
-  Built with open data | Hosted on GitHub Pages
+  OpenStreetMap data | Leaflet.js | MapMe
 </footer>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  // Create the map
+  var map = L.map('map').setView([20, 0], 2);
+
+  // Add OpenStreetMap tiles
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+</script>
 
 </body>
 </html>
