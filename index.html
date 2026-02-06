@@ -262,6 +262,31 @@ var overlays = {
 };
 
   L.control.layers(null, overlays).addTo(map);
+
+      // -------- LEGEND (LEAFLET CONTROL) --------
+
+  var legend = L.control({ position: 'bottomright' });
+
+  legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend');
+    div.style.background = 'white';
+    div.style.padding = '10px';
+    div.style.borderRadius = '6px';
+    div.style.boxShadow = '0 0 6px rgba(0,0,0,0.3)';
+    div.style.fontSize = '13px';
+
+    div.innerHTML += '<strong>Legend</strong><br>';
+    div.innerHTML += '🌊 Rivers<br>';
+    div.innerHTML += '🌱 Biosphere Reserves<br>';
+    div.innerHTML += '🦌 Protected Areas<br>';
+    div.innerHTML += '🌍 Climate Zones<br>';
+    div.innerHTML += '🌱 Soil Types<br>';
+
+    return div;
+  };
+
+  legend.addTo(map);
+
 </script>
 
 
