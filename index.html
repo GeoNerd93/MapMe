@@ -37,32 +37,6 @@
       font-size: 14px;
       background: #f1f1f1;
     }
-
-    .side-panel {
-      position: fixed;
-      top: 80px;
-      left: 10px;
-      width: 220px;
-      background: white;
-      padding: 12px;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.25);
-      font-size: 14px;
-      z-index: 1000;
-    }
-
-    .side-panel h3 {
-      margin-top: 0;
-      font-size: 16px;
-      text-align: center;
-    }
-
-    .side-panel label {
-      display: block;
-      margin-bottom: 6px;
-      cursor: pointer;
-    }
-
   </style>
 </head>
 
@@ -74,36 +48,6 @@
 </header>
 
 <div id="map"></div>
-
-  <div class="side-panel">
-  <h3>Layers</h3>
-
-  <label>
-    <input type="checkbox" checked onchange="toggleLayer('rivers')">
-    🌊 Rivers
-  </label>
-
-  <label>
-    <input type="checkbox" checked onchange="toggleLayer('biospheres')">
-    🌱 Biosphere Reserves
-  </label>
-
-  <label>
-    <input type="checkbox" checked onchange="toggleLayer('protectedAreas')">
-    🦌 Protected Areas
-  </label>
-
-  <label>
-    <input type="checkbox" checked onchange="toggleLayer('climateZones')">
-    🌍 Climate Zones
-  </label>
-
-  <label>
-    <input type="checkbox" checked onchange="toggleLayer('soilTypes')">
-    🌱 Soil Types
-  </label>
-</div>
-
 
 <footer>
   OpenStreetMap data | Leaflet.js | MapMe
@@ -325,7 +269,7 @@ var overlays = {
   "🌱 Soil Types": soilTypes
 };
 
- //L.control.layers(null, overlays).addTo(map);
+  L.control.layers(null, overlays).addTo(map);
       // -------- SEARCH CONTROL --------
 
   L.Control.geocoder({
@@ -358,27 +302,6 @@ var overlays = {
   };
 
   legend.addTo(map);
-
-      // -------- SIDE PANEL TOGGLE LOGIC --------
-
-  function toggleLayer(layerName) {
-    var layerMap = {
-      rivers: rivers,
-      biospheres: biospheres,
-      protectedAreas: protectedAreas,
-      climateZones: climateZones,
-      soilTypes: soilTypes
-    };
-
-    var layer = layerMap[layerName];
-
-    if (map.hasLayer(layer)) {
-      map.removeLayer(layer);
-    } else {
-      map.addLayer(layer);
-    }
-  }
-
 
 </script>
 
