@@ -1,0 +1,84 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "group": "A", "name": "Tropical Climate" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-180, -23.5],
+          [180, -23.5],
+          [180, 23.5],
+          [-180, 23.5],
+          [-180, -23.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "group": "B", "name": "Dry Climate" },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [[
+            [-20, 15],
+            [60, 15],
+            [60, 35],
+            [-20, 35],
+            [-20, 15]
+          ]],
+          [[
+            [110, -35],
+            [155, -35],
+            [155, -15],
+            [110, -15],
+            [110, -35]
+          ]]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "group": "C", "name": "Temperate Climate" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-180, 23.5],
+          [180, 23.5],
+          [180, 45],
+          [-180, 45],
+          [-180, 23.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "group": "D", "name": "Continental Climate" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-180, 45],
+          [180, 45],
+          [180, 66.5],
+          [-180, 66.5],
+          [-180, 45]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "group": "E", "name": "Polar Climate" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-180, 66.5],
+          [180, 66.5],
+          [180, 90],
+          [-180, 90],
+          [-180, 66.5]
+        ]]
+      }
+    }
+  ]
+}
