@@ -1,0 +1,96 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "code": "Af", "name": "Tropical Rainforest Climate" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-75, -5], [-50, -5], [-50, 5], [-75, 5], [-75, -5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "Am", "name": "Tropical Monsoon Climate" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [72, 8], [92, 8], [92, 25], [72, 25], [72, 8]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "Aw", "name": "Tropical Savanna Climate" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-180, -23.5], [180, -23.5], [180, 23.5], [-180, 23.5], [-180, -23.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "BWh", "name": "Hot Desert Climate" },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [[[-20, 15], [60, 15], [60, 35], [-20, 35], [-20, 15]]],
+          [[[110, -35], [155, -35], [155, -15], [110, -15], [110, -35]]]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "Cwa", "name": "Humid Subtropical (Dry Winter)" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [70, 20], [95, 20], [95, 35], [70, 35], [70, 20]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "Cfb", "name": "Marine West Coast Climate" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-10, 45], [20, 45], [20, 60], [-10, 60], [-10, 45]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "Dfc", "name": "Subarctic Climate" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-180, 50], [180, 50], [180, 66.5], [-180, 66.5], [-180, 50]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "ET", "name": "Tundra Climate" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-180, 66.5], [180, 66.5], [180, 80], [-180, 80], [-180, 66.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "EF", "name": "Ice Cap Climate" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-180, 80], [180, 80], [180, 90], [-180, 90], [-180, 80]
+        ]]
+      }
+    }
+  ]
+}
