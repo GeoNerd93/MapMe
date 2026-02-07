@@ -298,37 +298,40 @@ fetch('data/ne_10m_protected_areas_points.geojson')
 
          // Layer control
 
-// -------- KÖPPEN CLIMATE (MAJOR ZONES - LOCAL) --------
+// -------- KÖPPEN CLIMATE (SUB-TYPES – UPSC) --------
 
 var koppenClimate = L.geoJSON(null, {
   style: function (feature) {
-    const g = feature.properties.group;
+    const c = feature.properties.code;
     return {
       color: '#374151',
-      weight: 0.5,
+      weight: 0.6,
       fillColor:
-        g === 'A' ? '#16a34a' :   // Tropical
-        g === 'B' ? '#eab308' :   // Dry
-        g === 'C' ? '#22c55e' :   // Temperate
-        g === 'D' ? '#3b82f6' :   // Continental
-        g === 'E' ? '#e5e7eb' :   // Polar
+        c.startsWith('A') ? '#16a34a' :
+        c.startsWith('B') ? '#eab308' :
+        c.startsWith('C') ? '#22c55e' :
+        c.startsWith('D') ? '#3b82f6' :
+        c.startsWith('E') ? '#e5e7eb' :
         '#d1d5db',
-      fillOpacity: 0.35
+      fillOpacity: 0.4
     };
   },
   onEachFeature: function (feature, layer) {
     layer.bindPopup(
       "🌦️ Köppen Climate<br><strong>" +
+      feature.properties.code +
+      " – " +
       feature.properties.name +
       "</strong>"
     );
   }
 });
 
-fetch('data/koppen_major_zones.geojson')
+fetch('data/koppen_subtypes_upsc.geojson')
   .then(res => res.json())
   .then(data => koppenClimate.addData(data))
-  .catch(err => console.error("Köppen load error:", err));
+  .catch(err => console.error("Köppen subtype load error:", err));
+
 
 // Layer control
 
