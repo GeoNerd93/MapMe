@@ -298,18 +298,39 @@ fetch('data/ne_10m_protected_areas_points.geojson')
 
          // Layer control
 
-// -------- KÖPPEN CLIMATE (TILE LAYER) --------
+// -------- KÖPPEN CLIMATE (MAJOR ZONES - LOCAL) --------
 
-// -------- KÖPPEN CLIMATE (TILE LAYER – WORKING) --------
-
-var koppenClimate = L.tileLayer(
-  'https://tiles.openclimategis.org/koppen/{z}/{x}/{y}.png',
-  {
-    opacity: 0.6,
-    attribution: 'Köppen–Geiger Climate Classification'
+var koppenClimate = L.geoJSON(null, {
+  style: function (feature) {
+    const g = feature.properties.group;
+    return {
+      color: '#374151',
+      weight: 0.5,
+      fillColor:
+        g === 'A' ? '#16a34a' :   // Tropical
+        g === 'B' ? '#eab308' :   // Dry
+        g === 'C' ? '#22c55e' :   // Temperate
+        g === 'D' ? '#3b82f6' :   // Continental
+        g === 'E' ? '#e5e7eb' :   // Polar
+        '#d1d5db',
+      fillOpacity: 0.35
+    };
+  },
+  onEachFeature: function (feature, layer) {
+    layer.bindPopup(
+      "🌦️ Köppen Climate<br><strong>" +
+      feature.properties.name +
+      "</strong>"
+    );
   }
-);
+});
 
+fetch('data/koppen_major_zones.geojson')
+  .then(res => res.json())
+  .then(data => koppenClimate.addData(data))
+  .catch(err => console.error("Köppen load error:", err));
+
+// Layer control
 
 
       // -------- CLIMATE ZONES (SIMPLIFIED) --------
