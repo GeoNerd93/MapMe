@@ -1,0 +1,66 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "type": "Alluvial Soil" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [72, 22], [90, 22], [90, 32], [72, 32], [72, 22]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "type": "Black Soil (Regur)" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [73, 15], [85, 15], [85, 25], [73, 25], [73, 15]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "type": "Red Soil" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [75, 10], [90, 10], [90, 20], [75, 20], [75, 10]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "type": "Laterite Soil" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [73, 8], [80, 8], [80, 15], [73, 15], [73, 8]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "type": "Desert / Arid Soil" },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [[[-20, 15], [60, 15], [60, 35], [-20, 35], [-20, 15]]],
+          [[[110, -35], [155, -35], [155, -15], [110, -15], [110, -35]]]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "type": "Tundra / Polar Soil" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-180, 66.5], [180, 66.5], [180, 90], [-180, 90], [-180, 66.5]
+        ]]
+      }
+    }
+  ]
+}
