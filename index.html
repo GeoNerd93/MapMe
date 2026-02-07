@@ -367,39 +367,40 @@ fetch('data/koppen_subtypes_upsc.geojson')
 
 // Layer control
 
+// -------- GLOBAL SOIL TYPES (UPSC) --------
 
+var soilTypes = L.geoJSON(null, {
+  style: function (feature) {
+    const t = feature.properties.type;
+    return {
+      color: '#422006',
+      weight: 0.6,
+      fillColor:
+        t.includes('Alluvial') ? '#fde68a' :
+        t.includes('Black') ? '#1f2937' :
+        t.includes('Red') ? '#dc2626' :
+        t.includes('Laterite') ? '#b45309' :
+        t.includes('Desert') ? '#facc15' :
+        t.includes('Tundra') ? '#e5e7eb' :
+        '#d1d5db',
+      fillOpacity: 0.45
+    };
+  },
+  onEachFeature: function (feature, layer) {
+    layer.bindPopup(
+      "🌱 Soil Type<br><strong>" +
+      feature.properties.type +
+      "</strong>"
+    );
+  }
+});
 
-  // -------- SOIL TYPES (SIMPLIFIED) --------
+fetch('data/global_soil_types_upsc.geojson')
+  .then(res => res.json())
+  .then(data => soilTypes.addData(data))
+  .catch(err => console.error("Soil load error:", err));
 
-  var soilTypes = L.layerGroup();
-
-  // Alluvial Soil (Indo-Gangetic Plains)
-  L.rectangle([[22, 72], [32, 90]], {
-    color: '#a16207',
-    weight: 1,
-    fillOpacity: 0.25
-  })
-  .bindPopup("🌾 Alluvial Soil (Indo-Gangetic Plains)")
-  .addTo(soilTypes);
-
-  // Black Soil (Deccan Plateau)
-  L.rectangle([[16, 72], [24, 82]], {
-    color: '#1f2937',
-    weight: 1,
-    fillOpacity: 0.25
-  })
-  .bindPopup("⚫ Black Soil (Regur – Deccan Plateau)")
-  .addTo(soilTypes);
-
-  // Laterite Soil (Western Ghats & Eastern Ghats)
-  L.rectangle([[8, 73], [15, 80]], {
-    color: '#b45309',
-    weight: 1,
-    fillOpacity: 0.25
-  })
-  .bindPopup("🟤 Laterite Soil (Western & Eastern Ghats)")
-  .addTo(soilTypes);
-
+// Layer control
 
 //  L.control.layers(null, overlays).addTo(map);
       
@@ -449,13 +450,14 @@ div.innerHTML += 'Cwa – Humid Subtropical<br>';
 div.innerHTML += 'Dfc – Subarctic<br>';
 div.innerHTML += 'ET / EF – Tundra / Icecap<br>';
 
+div.innerHTML += '<hr><strong>🌱 Soil Types</strong><br>';
+div.innerHTML += 'Alluvial<br>';
+div.innerHTML += 'Black (Regur)<br>';
+div.innerHTML += 'Red<br>';
+div.innerHTML += 'Laterite<br>';
+div.innerHTML += 'Desert / Arid<br>';
+div.innerHTML += 'Tundra / Polar<br>';
 
-
-
-
-
-
-    
 
     return div;
   };
