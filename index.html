@@ -108,47 +108,44 @@
   <h3>Layers</h3>
 
 <div class="layer-item">
-  <input type="checkbox" id="chkCountries" checked>
+  <input type="checkbox" id="chkCountries">
   <span>🌍 Countries</span>
 </div>
 
 
   <div class="layer-item">
-    <input type="checkbox" id="chkRivers" checked>
+    <input type="checkbox" id="chkRivers">
     <span>🌊 Rivers</span>
   </div>
 
   <div class="layer-item">
-    <input type="checkbox" id="chkBiosphere" checked>
+    <input type="checkbox" id="chkBiosphere">
     <span>🌱 Biosphere</span>
   </div>
 
   <div class="layer-item">
-    <input type="checkbox" id="chkProtected" checked>
+    <input type="checkbox" id="chkProtected">
     <span>🦌 Protected Areas</span>
   </div>
 
-  <div class="layer-item">
-    <input type="checkbox" id="chkClimate" checked>
-    <span>🌍 Climate Zones</span>
-  </div>
 
   <div class="layer-item">
-    <input type="checkbox" id="chkSoil" checked>
+    <input type="checkbox" id="chkSoil">
     <span>🌱 Soil Types</span>
   </div>
 
 <div class="layer-item">
-  <input type="checkbox" id="chkKoppen">
-  <span>🌦️ Köppen Climate</span>
+  <input type="checkbox" id="chkKoppenMajor">
+  <span>🌦️ Köppen Major Zones</span>
+</div>
+
+<div class="layer-item">
+  <input type="checkbox" id="chkKoppenSub">
+  <span>🌦️ Köppen Sub-Zones</span>
 </div>
 
 
-   
-   
 </div>
-
-
 
 <footer>
   OpenStreetMap data | Leaflet.js | MapMe
@@ -298,6 +295,41 @@ fetch('data/ne_10m_protected_areas_points.geojson')
 
          // Layer control
 
+// -------- KÖPPEN CLIMATE (MAJOR ZONES) --------
+
+var koppenMajor = L.geoJSON(null, {
+  style: function (feature) {
+    const g = feature.properties.group;
+    return {
+      color: '#111827',
+      weight: 0.5,
+      fillColor:
+        g === 'A' ? '#16a34a' :
+        g === 'B' ? '#eab308' :
+        g === 'C' ? '#22c55e' :
+        g === 'D' ? '#3b82f6' :
+        g === 'E' ? '#e5e7eb' :
+        '#d1d5db',
+      fillOpacity: 0.25
+    };
+  },
+  onEachFeature: function (feature, layer) {
+    layer.bindPopup(
+      "🌦️ Köppen Major Zone<br><strong>" +
+      feature.properties.name +
+      "</strong>"
+    );
+  }
+});
+
+fetch('data/koppen_major_zones.geojson')
+  .then(res => res.json())
+  .then(data => koppenMajor.addData(data))
+  .catch(err => console.error("Köppen major load error:", err));
+
+// Layer control
+
+
 // -------- KÖPPEN CLIMATE (SUB-TYPES – UPSC) --------
 
 var koppenClimate = L.geoJSON(null, {
@@ -336,45 +368,6 @@ fetch('data/koppen_subtypes_upsc.geojson')
 // Layer control
 
 
-      // -------- CLIMATE ZONES (SIMPLIFIED) --------
-
-  var climateZones = L.layerGroup();
-
-  // Tropical Climate
-  L.rectangle([[-23.5, -180], [23.5, 180]], {
-    color: '#16a34a',
-    weight: 1,
-    fillOpacity: 0.15
-  })
-  .bindPopup("🌴 Tropical Climate Zone")
-  .addTo(climateZones);
-
-  // Desert / Arid Climate (approximate regions)
-  L.rectangle([[15, -30], [35, 60]], {
-    color: '#eab308',
-    weight: 1,
-    fillOpacity: 0.2
-  })
-  .bindPopup("🏜️ Desert / Arid Climate")
-  .addTo(climateZones);
-
-  // Temperate Climate (Northern Hemisphere mid-latitudes)
-  L.rectangle([[35, -180], [60, 180]], {
-    color: '#3b82f6',
-    weight: 1,
-    fillOpacity: 0.15
-  })
-  .bindPopup("🌦️ Temperate Climate Zone")
-  .addTo(climateZones);
-
-  // Polar Climate
-  L.rectangle([[66.5, -180], [90, 180]], {
-    color: '#e5e7eb',
-    weight: 1,
-    fillOpacity: 0.4
-  })
-  .bindPopup("❄️ Polar Climate Zone")
-  .addTo(climateZones);
 
   // -------- SOIL TYPES (SIMPLIFIED) --------
 
@@ -407,16 +400,10 @@ fetch('data/koppen_subtypes_upsc.geojson')
   .bindPopup("🟤 Laterite Soil (Western & Eastern Ghats)")
   .addTo(soilTypes);
 
-var overlays = {
-  "🌊 Rivers": rivers,
-  "🌱 Biosphere Reserves": biospheres,
-  "🦌 Protected Areas / Sanctuaries": protectedAreas,
-  "🌍 Climate Zones": climateZones,
-  "🌱 Soil Types": soilTypes
-};
 
 //  L.control.layers(null, overlays).addTo(map);
-      // -------- SEARCH CONTROL --------
+      
+// -------- SEARCH CONTROL --------
 
   L.Control.geocoder({
     defaultMarkGeocode: true,
@@ -445,13 +432,22 @@ var overlays = {
     div.innerHTML += '🌱 Soil Types<br>';
     div.innerHTML += '🌍 Countries<br>';
 
-div.innerHTML += '<hr>';
-div.innerHTML += '<strong>🌦️ Köppen Climate</strong><br>';
+div.innerHTML += '<hr><strong>🌦️ Köppen Climate</strong><br>';
+div.innerHTML += '<u>Major Zones</u><br>';
 div.innerHTML += 'A – Tropical<br>';
 div.innerHTML += 'B – Dry<br>';
 div.innerHTML += 'C – Temperate<br>';
 div.innerHTML += 'D – Continental<br>';
 div.innerHTML += 'E – Polar<br>';
+
+div.innerHTML += '<br><u>Sub-Zones (examples)</u><br>';
+div.innerHTML += 'Af – Rainforest<br>';
+div.innerHTML += 'Am – Monsoon<br>';
+div.innerHTML += 'Aw – Savanna<br>';
+div.innerHTML += 'BWh – Hot Desert<br>';
+div.innerHTML += 'Cwa – Humid Subtropical<br>';
+div.innerHTML += 'Dfc – Subarctic<br>';
+div.innerHTML += 'ET / EF – Tundra / Icecap<br>';
 
 
 
@@ -482,11 +478,12 @@ function bindToggle(checkboxId, layer) {
 bindToggle('chkRivers', rivers);
 bindToggle('chkBiosphere', biospheres);
 bindToggle('chkProtected', protectedAreas);
-bindToggle('chkClimate', climateZones);
 bindToggle('chkSoil', soilTypes);
 bindToggle('chkCountries', countries);
+bindToggle('chkKoppenMajor', koppenMajor);
+bindToggle('chkKoppenSub', koppenClimate);
+koppenClimate.bringToFront();
 
-bindToggle('chkKoppen', koppenClimate);
 
     
 
